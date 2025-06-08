@@ -1,5 +1,5 @@
-apt-get update
-apt-get install -y \
+sudo apt-get update
+sudo apt-get install -y \
     curl \
     git \
     build-essential \
@@ -24,3 +24,6 @@ apt-get install -y \
     python3-psutil \
     vlc \
     clang-format
+
+# aptのcmakeはバージョンが古いので、pipで配布されている新しいバージョンをインストールする。
+sudo pip install cmake==3.26.3
