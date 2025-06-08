@@ -1,4 +1,4 @@
-name: Test Custom Container
+name: Using custom container image
 
 on:
   push:
@@ -9,13 +9,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-22.04
+    container:
+      image: ghcr.io/ronekko/ubuntu22.04-cpp:latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: scripts/install_dependencies.sh
 
       - name: Build and test
         run: |
