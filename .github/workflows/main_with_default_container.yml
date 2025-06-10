@@ -2,9 +2,7 @@ name: Using default containerimage
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -16,6 +14,16 @@ jobs:
 
       - name: Install dependencies
         run: scripts/install_dependencies.sh
+
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          max-size: "5GB"
+          key: ${{ github.workflow }}-${{ github.ref_name }}
+          restore-keys: |
+            ${{ github.workflow }}-${{ github.ref_name }}
+            ${{ github.workflow }}-main
+            ${{ github.workflow }}-
 
       - name: Build and test
         run: |
