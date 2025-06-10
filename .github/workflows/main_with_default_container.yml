@@ -19,7 +19,6 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1.2
         with:
           max-size: "5GB"
-          append-timestamp: false
           key: ${{ github.workflow }}-${{ github.ref_name }}
           restore-keys: |
             ${{ github.workflow }}-${{ github.ref_name }}
