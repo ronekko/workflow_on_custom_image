@@ -2,9 +2,7 @@ name: Using custom container image
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -30,3 +28,12 @@ jobs:
       - name: Build and test
         run: |
           ci/run_test.sh
+
+      - name: Cache ccache directory (direct actions/cache test)
+        uses: actions/cache@v4
+        with:
+          path: /__w/workflow_using_custom_container_image/workflow_using_custom_container_image/.ccache # 完全パス指定
+          key: ccache-direct-test-${{ github.workflow }}-${{ github.ref_name }}
+          restore-keys: |
+            ccache-direct-test-${{ github.workflow }}-main
+            ccache-direct-test-${{ github.workflow }}-
